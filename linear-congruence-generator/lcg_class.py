@@ -6,6 +6,11 @@ POSIX_CONFIG = dict(seed=12345, modulus=2**48, a=0x5DEECE66D, c=11)
 
 
 class LCG:
+    """
+    Implementation of Linear Congruential Generator (LCG)
+
+    Ref: https://en.wikipedia.org/wiki/Linear_congruential_generator
+    """
     def __init__(self, seed=1, modulus=9, a=2, c=0):
         self.first_seed = seed
         self.seed = seed
@@ -23,7 +28,6 @@ ord_to_str = lambda s: reduce(lambda string, c: string + c, [chr(i) for i in s])
 
 def main():
     key = 1337  # Keys are merely numbers for now
-    # lcb = LCG(seed=key, modulus=2**48, a=0x5DEECE66D, c=11)
     configuration = dict(seed=key, modulus=2**48, a=0x5DEECE66D, c=11)
 
     # Encryption
@@ -33,15 +37,13 @@ def main():
     ciphertext = []
     for i in plaintext:
         ciphertext.append(i ^ lcb.step())
-        # print("{0}: {1}".format(i, lcb.step()))
     print("Ciphertext:", ciphertext)
 
     # Decryption
-    plaintext = []
     lcb = LCG(**configuration)
+    plaintext = []
     for i in ciphertext:
         plaintext.append(i ^ lcb.step())
-    # print("Decrypted plaintext:", plaintext)
     print("Plaintext:", ord_to_str(plaintext))
 
 if __name__ == '__main__':
