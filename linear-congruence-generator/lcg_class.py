@@ -28,7 +28,7 @@ ord_to_str = lambda s: reduce(lambda string, c: string + c, [chr(i) for i in s])
 
 def main():
     key = 1337  # Keys are merely numbers for now
-    configuration = dict(seed=key, modulus=2**48, a=0x5DEECE66D, c=11)
+    configuration = dict(seed=key, modulus=2**48, a=0x5DEECE66D, c=11)  # Config (except seed) pulled from POSIX glibc
 
     # Encryption
     lcb = LCG(**configuration)
